@@ -9,7 +9,6 @@ public class LivesViewExample : MonoBehaviour {
     [SerializeField] Text timeTillNextLiveLabel;
     LivesSystem lifeSystem;
 
-
     void Awake(){
         lifeSystem = LivesSystem.Instance;
         LivesStandard info = JsonUtility.FromJson<LivesStandard>(PlayerPrefs.GetString (SAVESTRING));
@@ -28,7 +27,6 @@ public class LivesViewExample : MonoBehaviour {
         numberOfLivesLabel.text = lifeSystem.Lives.GetCount().ToString ();
     }
 
-
     void Update(){
         if (Input.GetKeyDown (KeyCode.D)) {
             PlayerPrefs.DeleteAll ();
@@ -42,7 +40,6 @@ public class LivesViewExample : MonoBehaviour {
         }
         timeTillNextLiveLabel.text = lifeSystem.Lives.timeTillNextRecovery.ToString ();
     }
-
 
 	void OnEnable(){
 		lifeSystem.OnLifeConsumed += OnLifeConsumedHandler;
@@ -59,8 +56,6 @@ public class LivesViewExample : MonoBehaviour {
         PlayerPrefs.SetString (SAVESTRING, JsonUtility.ToJson (lifeSystem.GetInfoToSerialize ()));
         PlayerPrefs.Save ();
         UpdateNumberOfLives ();
-
-
 	}
 
 	void OnLifeRecoveredHandler(int newLivesCount){
@@ -68,7 +63,5 @@ public class LivesViewExample : MonoBehaviour {
         PlayerPrefs.SetString (SAVESTRING, JsonUtility.ToJson (lifeSystem.GetInfoToSerialize ()));
         PlayerPrefs.Save ();
         UpdateNumberOfLives (); 
-
 	}
-
 }
